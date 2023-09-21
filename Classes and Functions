@@ -1,0 +1,132 @@
+using System;
+public class FSA
+{
+    int state;
+    bool active = true;
+    public FSA(int state)
+    {
+        this.state = state;
+       
+
+    }
+    public int goToNextState()
+    {
+        if (state != 3)
+        {
+            state = state + 1;
+        }
+        else
+        {
+            state = 0;
+
+        }
+        return state;
+
+    }
+    public bool end()
+    {
+        if (state == 3)
+        {
+            return true;
+
+        }
+        else
+        {
+            return false;
+
+        }
+    }
+  public int showCurrentState()
+  {
+    return state;
+  }
+  public bool isActive()
+  {
+    if (active == true )
+    {
+      return true;
+      
+    }
+    else {
+      return false;
+    }
+  }
+}
+class Program
+{
+
+        public static void Main(string[] args)
+        {
+           FSA[] grid = new FSA [3];
+int index;
+  Random rand = new Random();
+
+          
+Console.WriteLine("[Array of Finite Automata]");
+          
+    for( int i =0; i<3; i++)
+    {
+      index = rand.Next(0,4);
+      grid [i]= new FSA(index);
+      
+      Console.WriteLine("Machine #"+i+" is starting at state "+index );
+      
+    }
+     Console.WriteLine();
+         
+        bool continueloop = true;
+        string choice;
+          int machine; 
+        do
+        {
+            Console.WriteLine("What would you like to do?");
+          Console.WriteLine("-Check the current status ");
+            Console.WriteLine("-Go to next state ");
+            Console.WriteLine("-End ");
+            choice = Console.ReadLine();
+
+            if (choice == "Go to next state")
+            {
+              Console.Write("WHat machine will you advance? ");
+              machine = Convert.ToInt32(Console.ReadLine());
+              FSA selected = grid[machine];
+              
+                int newstate = selected.goToNextState();
+                Console.WriteLine("Machine #"+ machine +" is active and is at state "+ newstate + ".");
+            }    
+         else if ( choice == "Check the current status")
+         {
+           Console.Write("WHat machine will you advance? ");
+              machine = Convert.ToInt32(Console.ReadLine());
+              FSA selected = grid[machine];
+           Console.WriteLine("Machine #"+selected+" is "+FSA.isActive()+" and at state"+FSA.showcurrentstatus());
+           
+         }
+          else if(choice == "End")
+            {
+
+                if (FSA.end() == true)
+                {
+                    continueloop = false;
+
+                }
+                else
+                {
+                    continueloop = true;
+                    Console.WriteLine("You can't stop here; you can only stop at state 3.");
+
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Invalid command");
+
+            }
+            
+          
+          
+  
+        } while (continueloop);
+        }     
+}
