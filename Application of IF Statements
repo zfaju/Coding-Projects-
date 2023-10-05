@@ -1,0 +1,59 @@
+
+﻿internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int response;
+        int response2;
+        int response3;
+
+        Console.WriteLine("[Epic Quest Simulator]");
+        Console.WriteLine("Hello stranger! Do you have time to hear my tale? ");
+        Console.WriteLine("1) Yes ");
+        Console.WriteLine("2) No ");
+        response = Convert.ToInt32(Console.ReadLine());
+
+        if (response == 1)
+        {
+            Console.WriteLine("Thank you! I come from the land of Pax Bisonica. Our country has been taken over by a cruel tyrant!");
+            Console.WriteLine("1) That's awful! ");
+            Console.WriteLine("2) What can I do? ");
+            response2 = Convert.ToInt32(Console.ReadLine());
+
+            if (response2 == 2)
+            {
+                Console.WriteLine("Please, you must journey to Pax Bisonica and free our country!");
+                Console.WriteLine("1) Yes ");
+                Console.WriteLine("2) No ");
+                response3 = Convert.ToInt32(Console.ReadLine());
+                if (response3 == 1)
+                {
+                    Console.WriteLine("Hooray!! ");
+                }
+                else
+
+                    Console.WriteLine("The all is lost...");
+            }
+            else
+                Console.WriteLine("Alas, it is truly terrible...");
+            Console.WriteLine("Please, you must journey to Pax Bisonica and free our country!");
+            Console.WriteLine("1) Yes ");
+            Console.WriteLine("2) No ");
+            response3 = Convert.ToInt32(Console.ReadLine());
+            if (response3 == 1)
+            {
+                Console.WriteLine("Hooray!! ");
+
+            }
+            else
+
+                Console.WriteLine("The all is lost...");
+
+
+        }
+
+        else
+            Console.WriteLine("Ah, then goodbye...");
+          
+        }
+}
