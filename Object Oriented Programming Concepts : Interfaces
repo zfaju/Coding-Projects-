@@ -1,0 +1,57 @@
+
+﻿internal class Program
+{
+    internal interface FindFib
+    {
+        public int calculate_fib(int x);
+    }
+    internal class FibFormula : FindFib
+    {
+        public int calculate_fib(int x)
+        {
+            double firstPart = (1 + Math.Sqrt(5)) / 2;
+            double secondPart = (1 - Math.Sqrt(5)) / 2;
+            double almostDone = Math.Pow(firstPart, x) - Math.Pow(secondPart, x);
+            return Convert.ToInt32(almostDone / Math.Sqrt(5));
+        }
+    }
+
+    internal class FibIteration : FindFib
+    {
+        public int calculate_fib(int x)
+        {
+            if (x == 1 || x == 2)
+            {
+                return 1;
+            }
+            int previous1 = 1;
+            int previous2 = 1;
+            int result = 0;
+            for (int i = 0; i < x - 2; i++)
+            {
+                result = previous1 + previous2;
+                //shift forward by one
+                previous2 = previous1;
+                previous1 = result;
+            }
+
+            return result;
+        }
+
+
+
+        private static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the number you want to find the Fibonacci Series for: ");
+            int input = Convert.ToInt32(Console.ReadLine());
+            FibIteration iteration = new FibIteration();
+            FibFormula formula = new FibFormula();
+            Console.WriteLine("Iteration fib of " + input + " is " + iteration.calculate_fib(input));
+            Console.WriteLine("Formula fib of " + input + " is " + formula.calculate_fib(input));
+            Console.ReadKey(); // keeps the output on the screen long enough for  you to read through 
+        }
+
+
+
+    }
+}
