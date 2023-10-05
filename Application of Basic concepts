@@ -1,0 +1,109 @@
+
+using System;
+
+class Program {
+   public static void PrintRecords(string[] array)
+   { 
+     Console.WriteLine(" Name: "+ array[0]);
+     Console.WriteLine("ID #: "+ array[1]);
+     Console.WriteLine("Address: " +array[2]);
+     Console.WriteLine("Homestate: "+array[3]);
+     
+   }
+   public static  bool inState(string state)
+   {
+     bool result;
+     if (state == "Georgia")
+     {
+       result = true;
+     }
+     else result= false;
+     
+
+     return result;
+     
+   }
+  
+  public static void Main (string[] args) {
+string  [] grid1 = new string[4];
+    string  [] grid2= new string  [4];
+
+    
+    grid1[0] = "Sally Forth";
+    grid1[1] =  "123432";
+    grid1[2]= "1100 Marietta Parkway";
+    grid1[3]= "Wisconsin";
+
+
+     grid2[0]= "Amari Naidoo";
+    grid2[1] = "867323";
+    grid2[2]= "25 Courthouse Square";
+    grid2[3]= "Georgia";
+
+    string studentID;
+    int choice; 
+    Console.WriteLine("[KSU Student Directory – Internal Use Only]");
+
+    Console.Write("Please enter a student ID number: ");
+    studentID= Console.ReadLine();
+
+    if( studentID== "867323")
+    {
+      Console.WriteLine("What d you want to know about "+grid2[0]+ "? ");
+      Console.WriteLine("1) Directory Information");
+      Console.WriteLine("2) In-state Tuition Status");
+      
+      choice= Convert.ToInt32(Console.ReadLine());
+           if (choice== 1)  
+           {
+             string information; 
+             information= PrintRecords(grid2);
+             
+           }
+       else if (choice ==2)
+       {
+         bool finalresult;
+         string state = grid2[3];
+         
+         finalresult= inState(state);
+         
+       }
+       else {
+         Console.WriteLine("Invalid option");
+         
+       }
+      
+        
+      
+      
+    }
+     else if(studentID == "123432")
+     {
+       Console.WriteLine("What do you want to know about "+grid2[0]+ "? ");
+      Console.WriteLine("1) Directory Information");
+      Console.WriteLine("2) In-state Tuition Status");
+      
+      choice= Convert.ToInt32(Console.ReadLine());
+           if (choice== 1)  
+           {
+             string information; 
+             information= PrintRecords(grid2);
+             
+           }
+       else if (choice ==2)
+       {
+         bool finalresult;
+         string state = grid2[3];
+         
+         finalresult= inState(state);
+         
+       
+     }
+     else {
+      Console.WriteLine("Invalid Student ID # ");
+       
+     }
+    
+    
+  }
+}
