@@ -1,0 +1,28 @@
+
+name = input("Please enter your name: ")
+print("Hello {}, you're looking well today.".format(name))
+equation = "x + (y / z) * w = ?"
+x = int(input("Enter the value of x: "))
+y = int(input("Enter the value of y: "))
+z = int(input("Enter the value of z: "))
+w = int(input("Enter the value of w: "))
+result = x + (y / z) * w
+equation_with_solution = equation.replace("?", str(result))
+
+print("The equation with the solution is:", equation_with_solution)
+price_of_meal = float(input("Enter the price of the meal: "))
+tax_rate = float(input("Enter the tax rate (as a percentage): "))
+delivery_fee = float(input("Enter the delivery fee: "))
+tax_amount = price_of_meal * (tax_rate / 100)
+subtotal = price_of_meal + delivery_fee
+fifteen_percent_tip = subtotal * 0.15
+twenty_percent_tip = subtotal * 0.20
+twentyfive_percent_tip = subtotal * 0.25
+total_with_15_tip = subtotal + tax_amount + fifteen_percent_tip
+total_with_20_tip = subtotal + tax_amount + twenty_percent_tip
+total_with_25_tip = subtotal + tax_amount + twentyfive_percent_tip
+print("Tax amount:", tax_amount)
+print("Subtotal:", subtotal)
+print("Total with 15% tip:", total_with_15_tip)
+print("Total with 20% tip:", total_with_20_tip)
+print("Total with 25% tip:", total_with_25_tip)
