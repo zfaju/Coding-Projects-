@@ -1,0 +1,67 @@
+
+using System;
+using System.Reflection.Emit;
+using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
+
+namespace MegaCalc
+{
+    public class MegaCalcForm : Form
+    {
+        private TextBox operand1TextBox;
+        private TextBox operand2TextBox;
+        private Button addButton;
+        private Label resultLabel;
+
+        public MegaCalcForm()
+        {
+            this.Text = "MegaCalc!";
+            this.Size = new System.Drawing.Size(400, 300);
+
+            operand1TextBox = new TextBox();
+            operand1TextBox.Location = new System.Drawing.Point(50, 50);
+            this.Controls.Add(operand1TextBox);
+
+            operand2TextBox = new TextBox();
+            operand2TextBox.Location = new System.Drawing.Point(200, 50);
+            this.Controls.Add(operand2TextBox);
+
+            addButton = new Button();
+            addButton.Text = "+";
+            addButton.Location = new System.Drawing.Point(150, 100);
+            addButton.Click += AddButton_Click;
+            this.Controls.Add(addButton);
+
+            resultLabel = new Label();
+            resultLabel.Location = new System.Drawing.Point(150, 150);
+            this.Controls.Add(resultLabel);
+        }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            int operand1, operand2;
+            if (int.TryParse(operand1TextBox.Text, out operand1) && int.TryParse(operand2TextBox.Text, out operand2))
+            {
+                int result = operand1 + operand2;
+                resultLabel.Text = result.ToString();
+            }
+            else
+            {
+                resultLabel.Text = "Invalid input";
+            }
+        }
+    }
+
+    class Program
+    {
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            MegaCalcForm form = new MegaCalcForm();
+            Application.Run(form);
+        }
+    }
+}
