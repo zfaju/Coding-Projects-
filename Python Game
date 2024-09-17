@@ -1,0 +1,102 @@
+
+import random
+
+def print_menu():
+    print("\nChoose an action:")
+    print("1) Continue journey")
+    print("2) Increase speed of travel")
+    print("3) Decrease speed of travel")
+    print("4) Increase rations")
+    print("5) Decrease rations")
+    print("6) Abandon journey")
+    return int(input("What do you want to do? "))
+
+def cause_of_death(deaths):
+    return random.choice(deaths)
+
+def travel(party, deaths, food, mileage, days, speed='normal', rations='normal'):
+    if speed == 'fast':
+        mileage += 10
+        death_chance = 0.20
+    elif speed == 'slow':
+        mileage += 2.5
+        death_chance = 0.01
+    else:
+        mileage += 5
+        death_chance = 0.10
+
+    if rations == 'increased':
+        food_consumption = 7.5
+        death_chance = 0.05
+    elif rations == 'decreased':
+        food_consumption = 2.5
+        death_chance = 0.15
+    else:
+        food_consumption = 5
+
+    food -= food_consumption * len(party)
+    for settler in party[:]:
+        if random.random() < death_chance:
+            print(f"{settler} has died of {cause_of_death(deaths)}.")
+            party.remove(settler)
+
+    days += 1
+    return party, food, mileage, days
+
+def main():
+    print("Welcome to the Trail Simulation Game!")
+    deaths = ['dysentery', 'a snake bite', 'measles', 'exhaustion', 'cholera']
+    party = []
+    mileage = 0
+    days = 1
+    destination = 2000  # Assume the destination is 2000 miles away
+
+    while True:
+        number_in_party = int(input("How many are in your party? (2-10): "))
+        if 2 <= number_in_party <= 10:
+            break
+        print("Invalid number of settlers. Please enter a number between 2 and 10.")
+
+    for i in range(number_in_party):
+        settler_name = input(f"Enter the name for settler {i+1}: ")
+        party.append(settler_name)
+
+    food = float(input("How much food are you starting with? (pounds): "))
+
+    while True:
+        print(f"\nDay {days}:")
+        print(f"Distance traveled: {mileage} miles")
+        print(f"Food remaining: {food} pounds")
+        print(f"Party members: {', '.join(party)}")
+        if not party or food <= 0 or mileage >= destination:
+            break
+
+        choice = print_menu()
+
+        if choice == 1:
+            party, food, mileage, days = travel(party, deaths, food, mileage, days)
+        elif choice == 2:
+            party, food, mileage, days = travel(party, deaths, food, mileage, days, speed='fast')
+        elif choice == 3:
+            party, food, mileage, days = travel(party, deaths, food, mileage, days, speed='slow')
+        elif choice == 4:
+            party, food, mileage, days = travel(party, deaths, food, mileage, days, rations='increased')
+        elif choice == 5:
+            party, food, mileage, days = travel(party, deaths, food, mileage, days, rations='decreased')
+        elif choice == 6:
+            print("You have decided to abandon the journey.")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 6.")
+
+    # Game has ended
+    print("\nGame Over")
+    print(f"Days taken: {days}")
+    print(f"Distance traveled: {mileage} miles")
+    print(f"Food remaining: {food} pounds")
+    print(f"Surviving party members: {', '.join(party) if party else 'None'}")
+    if mileage < destination:
+        print(f"You still had {destination: mileage}miles to reach the destination.")
+
+if __name__ == "__main__":
+    main()
