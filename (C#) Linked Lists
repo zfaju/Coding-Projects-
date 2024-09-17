@@ -1,0 +1,98 @@
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Prime
+{
+    private LinkedList<int> primes;
+
+    public Prime(int max)
+    {
+        primes = new LinkedList<int>();
+        bool[] isPrime = new bool[max + 1];
+        Array.Fill(isPrime, true);
+
+        for (int i = 2; i * i <= max; i++)
+   {
+            if (isPrime[i])
+            {
+                for (int j = i * i; j <= max; j += i)
+                {
+                    isPrime[j] = false;
+                }
+            }
+        }
+
+        for (int i = 2; i <= max; i++)
+        {
+            if (isPrime[i])
+            {
+                primes.AddLast(i);
+            }
+        }
+    }
+
+    public bool IsPrime(int number)
+    {
+        foreach (int prime in primes)
+        {
+            if (prime == number)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int GetPrime(int position)
+    {
+        return primes.ElementAt(position);
+    }
+}
+class Program
+{
+    private const int MAX = 10000;
+
+    static int FindFactor(int target, Prime primeObject)
+    {
+       foreach (int prime in primes.primeObject)
+           {
+               if (target % prime == 0)
+               {
+                   return prime;
+               }
+           }
+           return -1;
+       }
+
+
+    static void Main(string[] args)
+    {
+        Prime primeObject = new Prime(MAX);
+        Random random = new Random();
+
+        int randomNumber;
+        do
+        {
+            randomNumber = random.Next(MAX);
+        } while (randomNumber <= 2 || primeObject.IsPrime(randomNumber));
+
+        Console.WriteLine($"What primes make up {randomNumber}?");
+
+        while (randomNumber >= 2)
+        {
+            int factor = FindFactor(randomNumber, primeObject);
+            if (factor == -1)
+            {
+                break;
+            }
+            Console.Write(factor);
+            randomNumber /= factor;
+            if (randomNumber >= 2)
+            {
+                Console.Write("x");
+            }
+        }
+    }
+}
