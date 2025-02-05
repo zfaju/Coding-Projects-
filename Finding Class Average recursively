@@ -1,0 +1,114 @@
+
+import java.util.Scanner;
+
+    public class Main {
+        //public class AverageGrades {
+        public static int classSize = 0;
+        public static int[] grades = null;
+// findAverage method recursively sums the grades abd calculates the average when the base case (end of array) is reached
+
+        private static double findAverage(int[] grades, int index, int sum) {
+            if (index == grades.length) {
+                return (double) sum / grades.length;
+            }
+            return findAverage(grades, index + 1, sum + grades[index]);
+        }
+
+        public static void main(String[] args) {
+            //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
+            // to see how IntelliJ IDEA suggests fixing it.
+            Scanner scanner = new Scanner(System.in);
+            int option;
+            //in a loop the user is prompted to choose an option from the menu and will do so until the user picks option 4 to exit the program.
+            // a default statemnt is sent to the user in the case of the user inputting a value out of bound
+            do {
+                System.out.println("\n---MAIN MENU---");
+                System.out.println("1. Read class size");
+                System.out.println("2. Read class grades");
+                System.out.println("3. Compute class average");
+                System.out.println("4. Exit program");
+                System.out.println(" ");
+                System.out.print("Enter option number: ");
+
+
+                option = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+                System.out.println(" ");
+                switch (option) {
+                    //case 1, will prompt the user to enter the class size, which is a public static varaiable declared in the main program
+
+                    case 1:
+                        System.out.print("Enter class size: ");
+                        classSize = scanner.nextInt();
+                        if (classSize < 0) {
+                            // default statement that is displayed if class size is invalid
+
+
+                            System.out.println("Invalid class size. Please enter a non-negative value.");
+                            classSize = 0;
+                        }
+                        break;
+                    //System.out.println("You entered class size: " + classSize);
+
+                    case 2:
+                        // case 2 will prompt the user to enter the grades in accordance with the class size while making sure the grades are in range
+                        if (classSize <= 0) {
+                            System.out.println("Invalid class size. Please read class size first.");
+                        } else {
+                            // Each grade is stored in the array
+                            grades = new int[classSize];
+                            System.out.print("Enter grades: ");
+                            System.out.println(" ");
+                            for (int i = 0; i < classSize; i++) {
+                                System.out.print("Grade " + (i + 1) + ": ");
+
+                                grades[i] = scanner.nextInt();
+
+                                if (grades[i] < 0 || grades[i] > 100) {
+                                    System.out.println("Invalid grade. Please enter a grade between 0 and 100.");
+                                    i--; // Retry this grade
+                                }
+
+
+                            }
+                           /* System.out.print("You entered grades: ");
+                            for (int grade : grades) {
+                                System.out.print(grade + " ");
+                            }*/
+                            System.out.println();
+
+
+                        }
+                        break;
+                    case 3:
+                        // case 3 uses the findAverage() method to calculate and  display the average. Case 3 also dislays the grades stored in the  array and the class size
+                        if (grades == null || grades.length == 0) {
+                            System.out.println("No grades provided. Please read class grades first.");
+                        } else {
+                            double average = findAverage(grades, 0, 0);
+                            System.out.println("You entered class size: " + classSize);
+                            System.out.print("You entered grades: ");
+                            for (int grade : grades) {
+                                System.out.print(grade + " ");
+                            }
+                            System.out.println();
+                            System.out.printf("Class average: %.2f%n", average);
+                        }
+                        break;
+
+                    case 4:
+                        System.out.println("Exiting program...");
+                        break;
+                    default:
+                        System.out.println("Invalid option. Please try again.");
+
+                }
+            } while (option != 4);
+        }
+    }
+
+
+
+
+
+
