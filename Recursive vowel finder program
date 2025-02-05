@@ -1,0 +1,83 @@
+
+import java.util.Scanner;
+import java.util.LinkedList;
+
+
+public class Main {
+    private static String inputString = "";
+    /*private static void displayMenu() {
+
+        System.out.println("\n---MAIN MENU---");
+        System.out.println("1. Read input string");
+        System.out.println("2. Compute number of vowels");
+        System.out.println("3. Exit program");
+        System.out.print("Enter option number: ");
+        System.out.println("  ");
+    }
+*/
+    //this method countVowels, will take a string and  traverse the string and return the number of vowels in the string
+    private static int countVowels(String str) {
+
+        if (str.isEmpty()) {
+            return 0;
+        }
+        char firstChar = Character.toLowerCase(str.charAt(0));
+        if (firstChar == 'a' || firstChar == 'e' || firstChar == 'i' || firstChar == 'o' || firstChar == 'u') {
+            return 1 + countVowels(str.substring(1));
+        } else {
+            return countVowels(str.substring(1));
+        }
+    }
+    public static void main(String[] args) {
+
+            Scanner scanner = new Scanner(System.in);
+            int option;
+            do {
+                /*displayMenu();
+                 */
+                //lines 43 to 51, will display the menu and prompt and read the users option. Thes lines are within a loop, that will only end when option 3 is selected.
+                System.out.println("\n---MAIN MENU---");
+                System.out.println("1. Read input string");
+                System.out.println("2. Compute number of vowels");
+                System.out.println("3. Exit program");
+                System.out.print("Enter option number: ");
+                System.out.println("  ");
+                option = scanner.nextInt();
+
+                scanner.nextLine(); // Consume newline left-over
+
+                //lines 54-77 include each case
+                switch (option) {
+                    case 1:
+                        //case1 will prompt the user to enter a string, read the string and store it in a linkedlist called vowels.
+                        System.out.print("Please enter a string: ");
+                        inputString = scanner.nextLine();
+                        vowels.addString(inputString);
+                        System.out.println(" You entered: "+inputString);
+
+                        break;
+                    case 2:
+                        //case 2 will go through the  linkedlist vowels, and first check if the list is empty and notify the user of so.
+                        // If the linked list is not empty, the method countvowels() will be  called and print out the nummber of vowels in the string.
+                        if (vowels.vowels.isEmpty()){
+                            System.out.println("No input string provided. Please enter a string first.");
+                        } else {
+                            int vowelCount = countVowels(inputString);
+                            System.out.println(" Your string is: "+inputString);
+
+                            System.out.println("Number of vowels: " + vowelCount);
+                        }
+                        break;
+                    case 3:
+                        //case 3 will terminate the loop and end the program and l=notify the user of this
+                        System.out.println("Exiting program...");
+                        break;
+                        //the default line will deal with invalid inputs
+                    default:
+                        System.out.println("Invalid option. Please try again.");
+                }
+            } while (option != 3);
+
+            scanner.close();
+        }
+    }
